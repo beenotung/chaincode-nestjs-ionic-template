@@ -1,0 +1,8 @@
+= Chaincode - Nest.js - Ionic.js template
+
+starter kit of hyperledger fabric + nestjs + ionic generated from IDL
+
+== TODO
+
+- [ ] think how to 'upgrade' smart contract.
+- [ ] check if fabric key-value pair is private to the smart contact.

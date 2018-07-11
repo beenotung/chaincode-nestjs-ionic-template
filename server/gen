@@ -1,0 +1,3 @@
+#!/bin/bash
+nest g s $@
+nest g co $@

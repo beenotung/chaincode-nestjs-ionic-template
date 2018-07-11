@@ -1,0 +1,77 @@
+module demo {
+
+  typedef string<256> transactionId;
+  typedef unsigned long long date; // like long in Java
+  typedef sequence<octet> byteSeq;
+  typedef string base64;
+
+  // to be used inline
+  struct multihash {
+    string Method; // e.g. SHA256
+    sequence<octet> Digest; // byte array
+  };
+
+  struct signature {
+    transactionId SignerUserId; // links to public key
+    string Method; // e.g. RSA
+    sequence<octet> Signature;
+  };
+
+  // public key
+  struct pubKey {
+    string Method; // e.g. RSA using modulus and public exponent, or PEM format
+    sequence<octet> PubKey;
+  };
+
+  struct keyPair {
+    string Method;  // e.g. RSA PEM
+    string Content; // PEM, json, base64 or any way specified by Method
+  };
+
+  struct expire {
+    transactionId TxId;
+    date ExpireDate;
+    string Reason;
+    signature Signature;
+  };
+
+  struct user {
+    transactionId TxId;
+    string UserName;    // free text
+    pubKey UserPubKey;
+    signature Signature; // self signed
+  };
+
+  struct group {
+    transactionId TxId;
+    string GroupName;
+    pubKey GroupPubKey;
+    transactionId CreatorId; // user id of the founder
+    signature Signature; // self signed by group
+  };
+
+  struct user_group {
+    transactionId TxId;
+    transactionId GroupId;
+    transactionId UserId;
+    /*
+    .Values of Action
+    |===
+    | code | meaning
+    | 0x00 | join
+    | 0x01 | quit
+    |===
+    */
+    octet Action;
+    signature Signature; // signed by user
+  };
+
+  // only for join group
+  struct endorse_user_group {
+    transactionId TxId;
+    transactionId UserGroupId; // transaction id of the user_group proposal
+    transactionId Endorser; // user id of a group member
+    signature Signature; // signed by the endorser
+  };
+
+};

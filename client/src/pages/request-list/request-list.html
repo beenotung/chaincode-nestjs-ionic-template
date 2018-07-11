@@ -1,0 +1,31 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Requests</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list>
+    <ion-list-header>Latest Request List</ion-list-header>
+    <ion-item *ngFor="let request of requests">
+      <ion-label>ID: {{request.id}}, {{request.keywords}}, {{request.bonus}}</ion-label>
+      <ion-checkbox color="dark" checked="off"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <ion-buttons text-center>
+    <button ion-button (click)="showRequestResponse()">
+      <ion-icon name="edit"></ion-icon>
+      Response
+    </button>
+    <button ion-button (click)="showRequestUpdate()">
+      <ion-icon name="edit"></ion-icon>
+      Update
+    </button>
+  </ion-buttons>
+
+</ion-content>

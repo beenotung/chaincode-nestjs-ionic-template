@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+set -p pipefail
+find -name '*.ts' -delete
+find -name '*.java' -delete
+find -empty -delete

@@ -1,0 +1,35 @@
+<!--
+  Generated template for the CreateAccountPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Create Your Account</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary">Username</ion-label>
+      <ion-input type="text" [(ngModel)]="account.name" name="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary">Private Key</ion-label>
+      <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-buttons text-right>
+    <button ion-button (click)="CreateAccount()">
+      <ion-icon> </ion-icon>
+      Create
+    </button>
+  </ion-buttons>
+
+</ion-content>

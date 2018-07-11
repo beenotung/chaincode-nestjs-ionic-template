@@ -1,0 +1,25 @@
+#include "shared.idl"
+
+module demo {
+  module client {
+
+    interface WelcomePage {
+
+      void login(in keyPair UserKeyPair) raises(AuthError);
+
+      void createUser(in user User) raises(AuthError);
+
+      void createGroup(in group Group) raises(AuthError, Duplicated);
+
+      // throws Duplicated if already in group
+      void joinGroup(in transactionId GroupId, in user User) raises(AuthError, Duplicated);
+
+      // throws NotFound if not in group
+      void quitGroup(in transactionId GroupId, in user User) raises(AuthError, NotFound);
+
+    };
+
+    // other Pages are just wrapper for the server api
+
+  };
+};

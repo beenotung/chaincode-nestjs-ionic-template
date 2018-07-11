@@ -1,0 +1,67 @@
+#ifndef _demo_shared_
+#define _demo_shared_
+
+#include "data.idl"
+
+module demo {
+
+    typedef sequence<group> GroupSeq;
+    typedef sequence<user> UserSeq;
+
+    struct block {
+      unsigned long long Height;
+      date Time;
+      unsigned long NumOfTx;
+      string Miner; // TODO confirm the data type
+      multihash PrevHash;
+      multihash BlockHash;
+    };
+
+    struct dataContainer {
+      /*
+      .Values of Type
+      | code | meaning
+
+      | 0x01 | expire
+
+      | 0x02 | user
+      | 0x03 | group
+      | 0x04 | user_group
+      | 0x05 | endorse_user_group
+
+      | 0x06 | meta
+      | 0x07 | request
+      | 0x08 | reply
+      */
+      octet Type;
+      transactionId TxId;
+      any Data;
+    };
+
+    // for creation
+    struct newDataContainer {
+      short Type;
+      any Data;
+    };
+
+    exception NotFound {};
+    exception Duplicated {};
+    exception NetworkError {};
+    exception OutOfSpace {};
+    enum AuthErrorType {
+      ORG_AUTH_ERROR,
+      DEPARTMENT_AUTH_ERROR,
+      USER_AUTH_ERROR
+    };
+    enum AuthErrorReason {
+      NOT_FOUND,
+      INVALID // e.g. signature doesn't match
+    };
+    exception AuthError {
+      AuthErrorType Type;
+      AuthErrorReason Reason;
+    };
+
+};
+
+#endif

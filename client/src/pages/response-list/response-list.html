@@ -1,0 +1,30 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Responses</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-list-header>Latest Response List</ion-list-header>
+    <ion-item *ngFor="let response of responses">
+      <ion-label>ID: {{response.id}}, {{response.keywords}}, {{response.bonus}}</ion-label>
+      <ion-checkbox color="dark" checked="off"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <ion-buttons text-center>
+    <button ion-button (click)="showResponseAccept()">
+      <ion-icon name="edit"></ion-icon>
+      Accept
+    </button>
+    <button ion-button (click)="showResponseUpdate()">
+      <ion-icon name="edit"></ion-icon>
+      Update
+    </button>
+  </ion-buttons>
+
+</ion-content>
