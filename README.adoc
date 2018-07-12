@@ -1,6 +1,7 @@
 = Chaincode - Nest.js - Ionic.js template
 
 starter kit of hyperledger fabric + nestjs + ionic generated from IDL
+https://github.com/beenotung/chaincode-nestjs-ionic-template
 
 == TODO
 
