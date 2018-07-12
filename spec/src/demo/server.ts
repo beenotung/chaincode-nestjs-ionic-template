@@ -1,5 +1,5 @@
-import {base64, expire, pubKey, transactionId} from "./data";
-import {block, dataContainer, GroupSeq, newDataContainer, UserSeq} from "./shared";
+import {block, dataContainer, GroupSeq, newDataContainer, UserSeq} from './shared';
+import {expire, multihash, pubKey, transactionId} from './data';
 
 export type StringSeq = Array<string>;
 export type BlockSeq = Array<block>;
@@ -34,7 +34,8 @@ export abstract class UserHandler {
     abstract getUserPublicKey(UserId: transactionId): pubKey;
 
     // GET: /verifySignature/:Hash/UserId
-    abstract verifySignature(Hash: base64, UserId: transactionId): boolean; // return true if valid, false if not.
+    // return true if valid, false if not.
+    abstract verifySignature(Hash: multihash, UserId: transactionId): boolean;
 }
 
 // route: /block

@@ -1,4 +1,4 @@
-import {group, keyPair, transactionId, user} from "./data";
+import {group, keyPair, transactionId, user} from './data';
 
 export abstract class WelcomePage {
     abstract login(UserKeyPair: keyPair): void;

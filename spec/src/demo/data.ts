@@ -1,57 +1,77 @@
 export type transactionId = string;
-export type date = number; // like long in Java
+// globally unique, transactionId + '-' + increment
+export type id = string;
+export type time = number;
 export type byteSeq = Array<number>;
-export type base64 = string;
 
-// to be used inline
-export interface multihash {
-    Method: string; // e.g. SHA256
-    Digest: Array<number>; // byte array
-}
+// https://github.com/multiformats/multihash
+export type multihash = string;
+
+// https://github.com/multiformats/multibase
+// from text to binary explicitly, then to data implicitly
+export type multibase = string;
+
+// https://github.com/multiformats/multiaddr
+export type multiaddr = string;
+
+// https://github.com/multiformats/multicodec
+// from binary to data explicitly
+export type multicodec = Array<number>;
 
 export interface signature {
-    SignerUserId: transactionId; // links to public key
-    Method: string; // e.g. RSA
+    // links to public key
+    SignerUserId: id;
+    // e.g. RSA
+    Method: string;
     Signature: Array<number>;
 }
 
 // public key
 export interface pubKey {
-    Method: string; // e.g. RSA using modulus and public exponent, or PEM format
+    // e.g. RSA using modulus and public exponent, or PEM format
+    Method: string;
     PubKey: Array<number>;
 }
 
 export interface keyPair {
-    Method: string;  // e.g. RSA PEM
-    Content: string; // PEM, json, base64 or any way specified by Method
+    // e.g. RSA PEM
+    Method: string;
+    // PEM, json, base64 or any way specified by Method
+    Content: multibase;
 }
 
 export interface expire {
-    TxId: transactionId;
-    ExpireDate: date;
+    Id: id;
+    // the object to be discarded
+    TargetId: id;
+    ExpireDate: time;
     Reason: string;
     Signature: signature;
 }
 
 export interface user {
-    TxId: transactionId;
-    UserName: string;    // free text
+    Id: id;
+    // free text
+    UserName: string;
     UserPubKey: pubKey;
-    Signature: signature; // self signed
+    // self signed
+    Signature: signature;
 }
 
 export interface group {
-    TxId: transactionId;
+    Id: id;
     GroupName: string;
     GroupPubKey: pubKey;
-    CreatorId: transactionId; // user id of the founder
-    Signature: signature; // self signed by group
+    // user id of the founder
+    CreatorId: id;
+    // self signed by group
+    Signature: signature;
 }
 
 export interface user_group {
-    TxId: transactionId;
-    GroupId: transactionId;
-    UserId: transactionId;
+    Id: id;
+    GroupId: id;
+    UserId: id;
     /*
     .Values of Action
     |===
@@ -61,13 +81,17 @@ export interface user_group {
     |===
     */
     Action: number;
-    Signature: signature; // signed by user
+    // signed by user
+    Signature: signature;
 }
 
 // only for join group
 export interface endorse_user_group {
-    TxId: transactionId;
-    UserGroupId: transactionId; // transaction id of the user_group proposal
-    Endorser: transactionId; // user id of a group member
-    Signature: signature; // signed by the endorser
+    Id: id;
+    // transaction id of the user_group proposal
+    UserGroupId: id;
+    // user id of a group member
+    Endorser: id;
+    // signed by the endorser
+    Signature: signature;
 }

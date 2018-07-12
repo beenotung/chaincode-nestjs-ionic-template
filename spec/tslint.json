@@ -94,8 +94,8 @@
     ],
     "prefer-const": true,
     "quotemark": [
-      false,
-      "double",
+      true,
+      "single",
       "avoid-escape"
     ],
     "radix": true,

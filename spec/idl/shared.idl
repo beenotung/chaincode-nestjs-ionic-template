@@ -10,9 +10,10 @@ module demo {
 
     struct block {
       unsigned long long Height;
-      date Time;
+      time Time;
       unsigned long NumOfTx;
-      string Miner; // TODO confirm the data type
+      // TODO confirm the data type
+      string Miner;
       multihash PrevHash;
       multihash BlockHash;
     };
@@ -55,7 +56,8 @@ module demo {
     };
     enum AuthErrorReason {
       NOT_FOUND,
-      INVALID // e.g. signature doesn't match
+      // e.g. signature doesn't match
+      INVALID
     };
     exception AuthError {
       AuthErrorType Type;

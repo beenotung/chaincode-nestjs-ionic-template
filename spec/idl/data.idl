@@ -1,59 +1,79 @@
 module demo {
 
   typedef string<256> transactionId;
-  typedef unsigned long long date; // like long in Java
+  // globally unique, transactionId + '-' + increment
+  typedef string id;
+  typedef unsigned long long time;
   typedef sequence<octet> byteSeq;
-  typedef string base64;
 
-  // to be used inline
-  struct multihash {
-    string Method; // e.g. SHA256
-    sequence<octet> Digest; // byte array
-  };
+  // https://github.com/multiformats/multihash
+  typedef string multihash;
+
+  // https://github.com/multiformats/multibase
+  // from text to binary explicitly, then to data implicitly
+  typedef string multibase;
+
+  // https://github.com/multiformats/multiaddr
+  typedef string multiaddr;
+
+  // https://github.com/multiformats/multicodec
+  // from binary to data explicitly
+  typedef sequence<octet> multicodec;
 
   struct signature {
-    transactionId SignerUserId; // links to public key
-    string Method; // e.g. RSA
+    // links to public key
+    id SignerUserId;
+    // e.g. RSA
+    string Method;
     sequence<octet> Signature;
   };
 
   // public key
   struct pubKey {
-    string Method; // e.g. RSA using modulus and public exponent, or PEM format
+    // e.g. RSA using modulus and public exponent, or PEM format
+    string Method;
     sequence<octet> PubKey;
   };
 
   struct keyPair {
-    string Method;  // e.g. RSA PEM
-    string Content; // PEM, json, base64 or any way specified by Method
+    // e.g. RSA PEM
+    string Method;
+    // PEM, json, base64 or any way specified by Method
+    multibase Content;
   };
 
   struct expire {
-    transactionId TxId;
-    date ExpireDate;
+    id Id;
+    // the object to be discarded
+    id TargetId;
+    time ExpireDate;
     string Reason;
     signature Signature;
   };
 
   struct user {
-    transactionId TxId;
-    string UserName;    // free text
+    id Id;
+    // free text
+    string UserName;
     pubKey UserPubKey;
-    signature Signature; // self signed
+    // self signed
+    signature Signature;
   };
 
   struct group {
-    transactionId TxId;
+    id Id;
     string GroupName;
     pubKey GroupPubKey;
-    transactionId CreatorId; // user id of the founder
-    signature Signature; // self signed by group
+    // user id of the founder
+    id CreatorId;
+    // self signed by group
+    signature Signature;
   };
 
   struct user_group {
-    transactionId TxId;
-    transactionId GroupId;
-    transactionId UserId;
+    id Id;
+    id GroupId;
+    id UserId;
     /*
     .Values of Action
     |===
@@ -63,15 +83,19 @@ module demo {
     |===
     */
     octet Action;
-    signature Signature; // signed by user
+    // signed by user
+    signature Signature;
   };
 
   // only for join group
   struct endorse_user_group {
-    transactionId TxId;
-    transactionId UserGroupId; // transaction id of the user_group proposal
-    transactionId Endorser; // user id of a group member
-    signature Signature; // signed by the endorser
+    id Id;
+    // transaction id of the user_group proposal
+    id UserGroupId;
+    // user id of a group member
+    id Endorser;
+    // signed by the endorser
+    signature Signature;
   };
 
 };

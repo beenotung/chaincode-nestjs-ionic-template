@@ -15,7 +15,7 @@
   "author": "Beeno Tung",
   "license": "BSD-2-Clause",
   "devDependencies": {
-    "idl2ts": "^0.3.0",
+    "idl2ts": "^0.3.1",
     "tslint": "^5.9.1",
     "tslint-eslint-rules": "^5.3.1",
     "typescript": "^2.9.2"

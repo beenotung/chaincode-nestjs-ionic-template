@@ -12,7 +12,7 @@ cd idl
 if [ "$LANG" == "java" ]; then
   find -name '*.idl' -exec idlj {} \;
 else
-  find -name '*.idl' -exec ../node_modules/.bin/idl2ts {} \;
+  find -name '*.idl' | xargs -I {} ../node_modules/.bin/idl2ts "{}"
 fi
 cd ../
 

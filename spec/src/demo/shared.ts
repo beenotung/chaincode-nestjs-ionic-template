@@ -1,13 +1,14 @@
-import {date, group, multihash, transactionId, user} from "./data";
+import {group, multihash, time, transactionId, user} from './data';
 
 export type GroupSeq = Array<group>;
 export type UserSeq = Array<user>;
 
 export interface block {
     Height: number;
-    Time: date;
+    Time: time;
     NumOfTx: number;
-    Miner: string; // TODO confirm the data type
+    // TODO confirm the data type
+    Miner: string;
     PrevHash: multihash;
     BlockHash: multihash;
 }
@@ -54,7 +55,9 @@ export class OutOfSpace extends Error {
 export enum AuthErrorType {ORG_AUTH_ERROR, DEPARTMENT_AUTH_ERROR, USER_AUTH_ERROR}
 
 export enum AuthErrorReason {
-    NOT_FOUND, INVALID // e.g. signature doesn't match
+    NOT_FOUND,
+    // e.g. signature doesn't match
+    INVALID
 }
 
 export class AuthError extends Error {

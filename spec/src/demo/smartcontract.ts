@@ -1,5 +1,5 @@
-import {dataContainer, GroupSeq, newDataContainer, UserSeq} from "./shared";
-import {byteSeq, pubKey, transactionId} from "./data";
+import {dataContainer, GroupSeq, newDataContainer, UserSeq} from './shared';
+import {byteSeq, pubKey, transactionId} from './data';
 
 export abstract class GeneralContract {
     abstract create(NewDataContainer: newDataContainer): void;
@@ -18,5 +18,6 @@ export abstract class UserContract extends GeneralContract {
 
     abstract getUserPublicKey(UserId: transactionId): pubKey;
 
-    abstract varifySignature(Hash: byteSeq, UserId: transactionId): boolean; // return true if valid, false if not.
+    // return true if valid, false if not.
+    abstract varifySignature(Hash: byteSeq, UserId: transactionId): boolean;
 }

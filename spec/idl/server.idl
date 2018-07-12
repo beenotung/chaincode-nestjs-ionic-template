@@ -37,7 +37,8 @@ module demo {
       pubKey getUserPublicKey(in transactionId UserId) raises(NotFound);
 
       // GET: /verifySignature/:Hash/UserId
-      boolean verifySignature(in base64 Hash, in transactionId UserId) raises(NotFound); // return true if valid, false if not.
+      // return true if valid, false if not.
+      boolean verifySignature(in multihash Hash, in transactionId UserId) raises(NotFound);
 
     };
 
