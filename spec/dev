@@ -1,4 +1,0 @@
-#!/bin/bash
-find -name '*.idl' -exec idlj {} \;
-find -name '*.java' -delete
-find -empty -delete
